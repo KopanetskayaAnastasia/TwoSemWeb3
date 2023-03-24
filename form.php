@@ -50,6 +50,15 @@
               <label>3<input name="limbs" type="radio" value="3" /></label><br>
               <label>4<input name="limbs" type="radio" value="4" /></label>
               <br>
+              <label>Сверхспособности</label>
+              <br>
+              <select name="ability[]" multiple="multiple">
+                <option value="1" selected="selected">none</option>
+                <option value="2" >Бессмертие</option>
+                <option value="3" >Прохождения сквозь стены</option>
+                <option value="4" >Левитация</option>
+              </select>  
+              <br>
               <label>Биография:</label>
               <br>
               <input name="biography" type="textarea">

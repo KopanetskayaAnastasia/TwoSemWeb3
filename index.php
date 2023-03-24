@@ -48,6 +48,10 @@ if (empty($_POST['biography']) || !preg_match('/^([0-9a-zA-Zа-яА-Я\,\.\s]{1,
   print('Заполните биографию.<br/>');
   $errors = TRUE;
 }
+if (empty($_POST['ability'])) {
+  print('Заполните сферхспособности.<br/>');
+  $errors = TRUE;
+}
 
 
 
@@ -70,6 +74,11 @@ $db = new PDO('mysql:host=localhost;dbname=u52992', $user, $pass, [PDO::ATTR_PER
 try {
   $stmt = $db->prepare("INSERT INTO application SET name = ?, email=?, year=?, gender=?, biography=?, limbs=?");
   $stmt -> execute([$_POST['fio'], $_POST['email'],$_POST['year'],$_POST['gender'], $_POST['biography'],$_POST['limbs'] ]);
+  $app_id = $db->lastInsertId();
+  $stmt = $db->prepare("INSERT INTO ability_application SET ability_id= ?, application_id=?");
+  foreach ($_POST['ability'] as $ability) {
+    $stmt->execute([$ability, $app_id]);
+  }
 }
 catch(PDOException $e){
   print('Error : ' . $e->getMessage());
